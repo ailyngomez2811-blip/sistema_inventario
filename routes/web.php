@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,7 +10,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('clientes.dashboard');
+    /** @var User $user */
+    $user = Auth::user();
+    $role = $user->role_id;
+    if ($role == 1) {
+        return view('admin.dashboard');
+    } elseif ($role == 2) {
+        return view('vendedor.dashboard');
+    } else {
+        return view('clientes.dashboard');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -17,4 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
