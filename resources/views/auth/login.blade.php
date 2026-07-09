@@ -64,4 +64,17 @@
         </div>
         @endif
     </form>
+
+    @if (session('error'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Acceso denegado',
+            text: '{{ session('error') }}',
+            confirmButtonColor: '#ef4444',
+            confirmButtonText: 'Entendido'
+        });
+    </script>
+    @endif
 </x-guest-layout>

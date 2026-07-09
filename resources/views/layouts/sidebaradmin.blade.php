@@ -62,49 +62,49 @@
                     <!-- Unidades Productivas -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link text-success">
-                            <i class="fas fa-seedling"></i> &nbsp;
+                            <i class="fas fa-users"></i> &nbsp;
                             <p>
-                                Unidades Productivas
+                                Gestión de usuarios
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link text-dark">
-                                    <i class="nav-icon fas fa-edit"></i>
-                                    <p>Ingreso</p>
+                                <a href="{{ route('usuarios.create') }}" class="nav-link text-dark">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>Registrar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-dark">
-                                    <i class="nav-icon fas fa-clipboard-list"></i>
-                                    <p>Listas</p>
+                                <a href="{{ route('usuarios.index') }}" class="nav-link text-success">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>Listar</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- Bodega Finca -->
+                    <!-- proveedores -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link text-success">
-                            <i class="fas fa-warehouse"></i>&nbsp;
+                            <i class="fas fa-user-tag"></i>&nbsp;
                             <p>
-                                Bodega Finca
+                                Proveedores
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href=""
-                                    class="nav-link text-dark">
-                                    <i class="nav-icon fas fa-box"></i>
-                                    <p>Insumos</p>
+                                <a href="{{ route('proveedores.create') }}"
+                                    class="nav-link text-success">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>Registrar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-dark">
-                                    <i class="nav-icon fas fa-tools"></i>
-                                    <p>Herramientas</p>
+                                <a href="{{ route('proveedores.index') }}" class="nav-link text-success">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>Listar</p>
                                 </a>
                             </li>
                         </ul>
