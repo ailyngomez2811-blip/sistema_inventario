@@ -58,7 +58,8 @@ class ProveedorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $proveedor = Proveedor::findOrFail($id);
+        return response()->json($proveedor);
     }
 
     /**
@@ -66,7 +67,29 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $proveedor = Proveedor::findOrFail($id);
+
+        $request->validate([
+            'nombre'       => 'required|string|max:255',
+            'nit_documento'=> 'nullable|string|max:50|unique:proveedores,nit_documento,' . $id,
+            'telefono'     => 'nullable|string|max:20',
+            'email'        => 'nullable|email|max:255',
+            'direccion'    => 'nullable|string|max:255',
+            'contacto'     => 'nullable|string|max:255',
+        ]);
+
+        $proveedor->update([
+            'nombre'        => $request->nombre,
+            'nit_documento' => $request->nit_documento,
+            'telefono'      => $request->telefono,
+            'email'         => $request->email,
+            'direccion'     => $request->direccion,
+            'contacto'      => $request->contacto,
+        ]);
+
+        return redirect()
+            ->route('proveedores.index')
+            ->with('success', '¡Proveedor actualizado exitosamente!');
     }
 
     /**

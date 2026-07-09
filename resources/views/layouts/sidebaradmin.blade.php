@@ -19,10 +19,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('css')
 </head>
 
-<body>
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -172,6 +174,7 @@
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
+    </div>
     <!-- /.control-sidebar -->
     <!-- ./wrapper -->
 
@@ -191,6 +194,7 @@
     <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('AdminLTE-3.2.0/dist/js/demo.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

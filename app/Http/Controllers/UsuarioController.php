@@ -62,7 +62,8 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        return response()->json($usuario);
     }
 
     /**
@@ -70,7 +71,31 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|unique:users,email,' . $id,
+            'role_id'  => 'required|integer',
+            'telefono' => 'nullable|string|max:20',
+            'direccion'=> 'nullable|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->role_id = $request->role_id;
+        $usuario->telefono = $request->telefono;
+        $usuario->direccion = $request->direccion;
+
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
+
+        $usuario->save();
+
+        return redirect()->route('usuarios.index')
+            ->with('success', 'Usuario actualizado correctamente.');
     }
 
     /**
@@ -78,7 +103,18 @@ class UsuarioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        
+        // Evitar que el usuario logueado se elimine a sí mismo
+        if ($usuario->id === Auth::id()) {
+            return redirect()->route('usuarios.index')
+                ->with('error', 'No puedes eliminar tu propia cuenta.');
+        }
+
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index')
+            ->with('success', 'Usuario eliminado correctamente.');
     }
 
     /**
